@@ -1,10 +1,10 @@
-var app = angular.module('budget', []);
+var app = angular.module('budget', ['ui.bootstrap']);
 
 app.controller('MainCtrl', function ($scope) {
     $scope.periods = ['2014-01', '2014-02', '2014-03'];
     $scope.currentPeriod = $scope.periods[0];
-    
-    $scope.changeCurrentPeriod =  function(period) {
+
+    $scope.changeCurrentPeriod = function (period) {
         $scope.currentPeriod = period;
     };
 
@@ -104,4 +104,19 @@ app.controller('MainCtrl', function ($scope) {
         var searchedIncome = $scope.incomes.indexOf(income);
         $scope.incomes.splice(searchedIncome, 1);
     };
+
+
+    $scope.datePickerOpen = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+    };
+
+    $scope.datePickerOptions = {
+        formatYear: 'yyyy',
+        startingDay: 1,
+        showWeeks: false
+    };
+
+    $scope.datePickerFormat = 'yyyy-MM-dd';
 });
