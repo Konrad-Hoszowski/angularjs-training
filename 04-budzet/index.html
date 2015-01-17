@@ -60,9 +60,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-                            <!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></button>-->
+
                             <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><span data-toggle="modal" data-target="#period-modal" role="menuitem" tabindex="-1">Definiuj nowy okres rozliczeniowy</span>
+                                <li role="presentation">
+                                    <a href="#" data-toggle="modal" data-target="#period-modal" role="menuitem" tabindex="-1">Definiuj nowy okres rozliczeniowy</a>
                                 </li>
                                 <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#default-values-modal">Domyślne płatności</a>
                                 </li>
@@ -401,22 +402,30 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="period-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add new period</h4>
+                        <h4 class="modal-title">Dodaj nowy okres rozliczeniowy</h4>
                     </div>
                     <div class="modal-body">
 
-                        <input type="text" ng-model="period"/>
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" id="period-date" class="form-control" datepicker-popup="{{datePickerFormatPeriod}}" datepicker-options="datePickerOptions" ng-model="period" is-open="opened" ng-required="true" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-default" ng-click="datePickerOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                        
+
                         <button class="btn btn-default" data-dismiss="modal" ng-click="saveNewPeriod(period)">Save</button>
                     </div>
                 </div>
@@ -437,7 +446,7 @@
         <!-- end container -->
     </footer>
 
-</div>
+    </div>
 
 
     <!-- Latest compiled and minified JavaScript -->

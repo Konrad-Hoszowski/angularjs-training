@@ -119,6 +119,7 @@ app.controller('MainCtrl', function ($scope, dialogService) {
     };
 
     $scope.datePickerFormat = 'yyyy-MM-dd';
+    $scope.datePickerFormatPeriod = 'yyyy-MM';
     
     $scope.tryRemoveExpense = function(expense) {
         askToExecute(function() {
@@ -141,7 +142,7 @@ app.controller('MainCtrl', function ($scope, dialogService) {
     }
     
     $scope.saveNewPeriod = function(period) {
-        $scope.periods.push(period);    
+        $scope.periods.push(moment(period).format('YYYY-MM'));    
     };
     
 });
