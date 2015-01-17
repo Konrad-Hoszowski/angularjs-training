@@ -11,7 +11,7 @@ app.controller('MainCtrl', function ($scope) {
             "description": "Bo wylacza prad",
             "paid": true,
             "paidDate": "2014-02-12"
-            
+
         },
         {
             "title": "Czynsz2",
@@ -25,5 +25,13 @@ app.controller('MainCtrl', function ($scope) {
             "deadline": "2014-02-12",
             "description": "Bo wylacza prad"
         }];
-    
+
+    $scope.getTotalExpenses = function () {
+        var total = 0;
+        $scope.expenses.forEach(function (expense) {
+            total += expense.amount;
+        });
+        return total;
+    };
+
 });
