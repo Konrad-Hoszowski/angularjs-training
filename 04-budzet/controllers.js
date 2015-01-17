@@ -49,7 +49,6 @@ app.controller('MainCtrl', function ($scope) {
 
     $scope.getTotalExpensesPaid = function () {
         var totalPaid = 0;
-
         var paid = $scope.expenses.filter(function (expense) {
             return expense.paid;
         });
@@ -59,24 +58,38 @@ app.controller('MainCtrl', function ($scope) {
         });
         return totalPaid;
     };
-    
-    $scope.markAsPaid = function(expense) {
+
+    $scope.markAsPaid = function (expense) {
         expense.paid = true;
         expense.paidDate = moment().format('YYYY-MM-DD');
-        
+
     };
-    
-    $scope.removeExpense = function(expense) {
+
+    $scope.removeExpense = function (expense) {
         var searchedExpense = $scope.expenses.indexOf(expense);
         $scope.expenses.splice(searchedExpense, 1);
     };
-    
-    $scope.addExpense = function() {
+
+    $scope.addExpense = function () {
         console.log($scope.newExpense);
         $scope.newExpense.id = Math.random();
         $scope.expenses.push($scope.newExpense);
         $scope.newExpense = null;
-    
     };
+
+    $scope.incomes = [{
+            "id": 1,
+            "title": "PensjA1",
+            "amount": 1100000.52,
+            "date": "2014-02-12",
+            "description": "Od IQ",
+        },
+        {
+            "id": 2,
+            "title": "PensjA2",
+            "amount": 2.00,
+            "date": "2014-02-15",
+            "description": "Od AAA",
+        }];
 
 });
