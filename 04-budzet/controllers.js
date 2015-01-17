@@ -65,5 +65,10 @@ app.controller('MainCtrl', function ($scope) {
         expense.paidDate = moment().format('YYYY-MM-DD');
         
     };
+    
+    $scope.removeExpense = function(expense) {
+        var searchedExpense = $scope.expenses.indexOf(expense);
+        $scope.expenses.splice(searchedExpense, 1);
+    };
 
 });
