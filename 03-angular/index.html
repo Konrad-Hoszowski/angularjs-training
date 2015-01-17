@@ -9,8 +9,46 @@
 
 <body ng-controller="MainCtrl">
 
-  
 
+  1+2={{1+2}}
+<br>
+    {{sometext}}
+    <br>
+    <input type="text" ng-model="sometext" value="{{sometext}}">
+    
+    
+    <div ng-repeat="user in users">
+        <div>
+            <h3>{{user.name}} ({{user.gender}})</h3>
+            {{user.description}}  <input type="text" ng-model="user.description" placeholder="Enter a name here">
+        </div>
+    </div>
+
+    <div ng-repeat="user in users" ng-show="user.gender == 'female'">
+        <div>
+            <h3>{{user.name}} ({{user.gender}})</h3>
+            {{user.description}}  <input type="text" ng-model="user.description" placeholder="Enter a name here">
+        </div>
+    </div>
+
+    <div my-super-custom-directive ></div>
+
+
+    
+    <div>
+        <label>Name:</label>
+        <input type="text" ng-model="name" placeholder="Enter a name here">
+        <hr>
+        <h1>Hello {{name | uppercase}}!</h1>
+    </div>
+    
+    <hr>
+    <form name="myForm" novalidate>  <!-- novalidate is used to disable browser's native form validation -->
+            <input type="text" name="user" ng-model="user" required>
+            <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid"><span ng-show="myForm.user.$error.required">Username is required.</span></span>
+            <input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid">
+    </form>
+
+    
 </body>
-
 </html>
