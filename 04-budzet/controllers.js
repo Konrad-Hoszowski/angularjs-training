@@ -70,5 +70,13 @@ app.controller('MainCtrl', function ($scope) {
         var searchedExpense = $scope.expenses.indexOf(expense);
         $scope.expenses.splice(searchedExpense, 1);
     };
+    
+    $scope.addExpense = function() {
+        console.log($scope.newExpense);
+        $scope.newExpense.id = Math.random();
+        $scope.expenses.push($scope.newExpense);
+        $scope.newExpense = null;
+    
+    };
 
 });
