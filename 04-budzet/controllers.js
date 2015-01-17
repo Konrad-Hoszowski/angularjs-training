@@ -34,4 +34,27 @@ app.controller('MainCtrl', function ($scope) {
         return total;
     };
 
+//    $scope.getTotalExpensesPaid = function () {
+//        var totalPaid = 0;
+//        $scope.expenses.forEach(function (expense) {
+//            if(expense.paid) {
+//                totalPaid += expense.amount;
+//            }
+//        });
+//        return totalPaid;
+//    };
+    
+    $scope.getTotalExpensesPaid = function () {
+        var totalPaid = 0;
+        
+        var paid = $scope.expenses.filter(function(expense){
+            return expense.paid;
+        });
+        
+        paid.forEach(function (expense) {
+                totalPaid += expense.amount;
+        });
+        return totalPaid;
+    };
+
 });

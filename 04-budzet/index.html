@@ -110,11 +110,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 text-left">Już zapłacono:</div>
-                                <div class="col-sm-6 text-right">100.00 PLN</div>
+                                <div class="col-sm-6 text-right">{{getTotalExpensesPaid()}} PLN</div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 text-left">Jeszcze do zapłaty:</div>
-                                <div class="col-sm-6 text-right">24.00 PLN</div>
+                                <div class="col-sm-6 text-right">{{getTotalExpenses() - getTotalExpensesPaid()}} PLN</div>
                             </div>
                         </div>
                     </div>
