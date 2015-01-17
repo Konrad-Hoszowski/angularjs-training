@@ -140,6 +140,10 @@ app.controller('MainCtrl', function ($scope, dialogService) {
         });
     }
     
+    $scope.saveNewPeriod = function(period) {
+        $scope.periods.push(period);    
+    };
+    
 });
 
 
