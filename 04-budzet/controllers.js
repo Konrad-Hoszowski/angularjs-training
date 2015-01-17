@@ -1,6 +1,6 @@
 var app = angular.module('budget', ['ui.bootstrap']);
 
-app.controller('MainCtrl', function ($scope) {
+app.controller('MainCtrl', function ($scope, dialogService) {
     $scope.periods = ['2014-01', '2014-02', '2014-03'];
     $scope.currentPeriod = $scope.periods[0];
 
@@ -89,10 +89,10 @@ app.controller('MainCtrl', function ($scope) {
         $scope.newExpense = null;
     };
 
-    $scope.removeExpense = function (expense) {
+    function removeExpense(expense) {
         var searchedExpense = $scope.expenses.indexOf(expense);
         $scope.expenses.splice(searchedExpense, 1);
-    };
+    }
 
     $scope.addIncome = function () {
         $scope.newIncome.id = Math.random();
@@ -119,6 +119,18 @@ app.controller('MainCtrl', function ($scope) {
     };
 
     $scope.datePickerFormat = 'yyyy-MM-dd';
+    
+    
+    $scope.showConfirm = function(expense){
+        dialogService.confirm().then(function (result) {
+            if(result){
+                removeExpense(expense);
+            } else {
+                console.log("nie: " + expense);
+            }
+        });
+    };
+    
 });
 
 

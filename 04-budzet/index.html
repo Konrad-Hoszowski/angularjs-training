@@ -22,6 +22,7 @@
     <!--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
 
     <script src="controllers.js"></script>
+    <script src="dialogService.js"></script>
 
 </head>
 
@@ -191,7 +192,7 @@
                     </div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" ng-click="removeExpense(expense)"></button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" ng-click="showConfirm(expense)"></button>
                     </div>
                 </div>
 
@@ -415,6 +416,7 @@
         <!-- end container -->
     </footer>
 
+</div>
 
 
     <!-- Latest compiled and minified JavaScript -->
