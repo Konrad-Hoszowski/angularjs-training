@@ -28,7 +28,7 @@ app.controller('MainCtrl', function ($scope) {
             "deadline": "2014-02-12",
             "description": "Bo wylacza prad"
         }];
-    
+
     $scope.incomes = [{
             "id": 1,
             "title": "PensjA1",
@@ -47,16 +47,16 @@ app.controller('MainCtrl', function ($scope) {
     $scope.getTotalIncomes = function () {
         return $scope.getTotal($scope.incomes, "amount");
     };
-    
+
     $scope.getTotalExpenses = function () {
         return $scope.getTotal($scope.expenses, "amount");
     };
-    
-    
+
+
     $scope.getTotal = function (list, item) {
         var total = 0;
         list.forEach(function (expense) {
-            total += expense[item];
+            total += parseFloat(expense[item]);
         });
         return total;
     };
@@ -79,16 +79,25 @@ app.controller('MainCtrl', function ($scope) {
 
     };
 
+    $scope.addExpense = function () {
+        $scope.newExpense.id = Math.random();
+        $scope.expenses.push($scope.newExpense);
+        $scope.newExpense = null;
+    };
+
     $scope.removeExpense = function (expense) {
         var searchedExpense = $scope.expenses.indexOf(expense);
         $scope.expenses.splice(searchedExpense, 1);
     };
 
-    $scope.addExpense = function () {
-        console.log($scope.newExpense);
-        $scope.newExpense.id = Math.random();
-        $scope.expenses.push($scope.newExpense);
-        $scope.newExpense = null;
+    $scope.addIncome = function () {
+        $scope.newIncome.id = Math.random();
+        $scope.incomes.push($scope.newIncome);
+        $scope.newIncome = null;
     };
-    
+
+    $scope.removeIncome = function (income) {
+        var searchedIncome = $scope.incomes.indexOf(income);
+        $scope.incomes.splice(searchedIncome, 1);
+    };
 });

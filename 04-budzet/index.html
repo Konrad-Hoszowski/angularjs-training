@@ -222,7 +222,7 @@
                     <div class="col-xs-4">{{income.description}}</div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
+                        <button type="button" ng-click="removeIncome(income)" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
             </section>
@@ -244,28 +244,28 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="income-title" class="control-label">Tytuł przychodu</label>
-                                <input type="text" id="income-title" class="form-control">
+                                <input type="text" ng-model="newIncome.title" id="income-title" class="form-control">
                                 <p class="help-block">Tytuł pozycji</p>
                             </div>
                             <div class="form-group">
                                 <label for="income-amount" class="control-label">Kwota</label>
-                                <input type="text" id="income-amount" class="form-control">
+                                <input type="text" ng-model="newIncome.amount" id="income-amount" class="form-control">
                                 <p class="help-block">Kwota przychodu w formacie xx.yy</p>
                             </div>
                             <div class="form-group">
                                 <label for="income-description" class="control-label">Opis</label>
-                                <input type="text" id="income-description" class="form-control">
+                                <input type="text" ng-model="newIncome.description" id="income-description" class="form-control">
                                 <p class="help-block">Dłuższy opis pozycji</p>
                             </div>
                             <div class="form-group">
                                 <label for="income-date" class="control-label">Data wpłaty</label>
-                                <input type="text" id="income-date" class="form-control">
+                                <input type="text" ng-model="newIncome.date" id="income-date" class="form-control">
                                 <p class="help-block">Termin otrzymania płatności.</p>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <button type="button" ng-click="addIncome()" class="btn btn-default" data-dismiss="modal">Save</button>
                         </div>
                     </form>
                 </div>
