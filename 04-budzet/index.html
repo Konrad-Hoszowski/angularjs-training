@@ -41,9 +41,9 @@
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy ({{currentPeriod}}) <span class="caret"></span></a>
-                            <!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy (2015-01) <span class="caret"></span></button>-->
+                
                             <ul class="dropdown-menu" role="menu">
-                                <li ng-repeat="period in periods"><a href="#">{{period}}</a>
+                                <li ng-repeat="period in periods"><a href="#" ng-click="changeCurrentPeriod(period)">{{period}}</a>
                                 </li>
 
                             </ul>

@@ -3,6 +3,10 @@ var app = angular.module('budget', []);
 app.controller('MainCtrl', function ($scope) {
     $scope.periods = ['2014-01', '2014-02', '2014-03'];
     $scope.currentPeriod = $scope.periods[0];
+    
+    $scope.changeCurrentPeriod =  function(period) {
+        $scope.currentPeriod = period;
+    };
 
     $scope.expenses = [{
             "id": 1,
