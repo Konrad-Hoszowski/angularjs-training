@@ -37,11 +37,11 @@
                         <li class="active"><a href="#expense-section">Wydatki</a>      </li>
                         <li><a href="#income-section">Przychody</a> </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy (2015-01) <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy ({{currentPeriod}}) <span class="caret"></span></a>
 <!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy (2015-01) <span class="caret"></span></button>-->
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">2014-02</a></li>
-                                <li><a href="#">2014-01</a></li>
+                                <li ng-repeat="period in periods"><a href="#">{{period}}</a></li>
+
                             </ul>
                         </li>
                     </ul>
@@ -63,7 +63,7 @@
         <div class="jumbotron" id="top-section">
             <div class="container">
                 <h1>Budżet domowy</h1>
-                <h3>Miesiąc rozliczeniowy: 2015-01</h3>
+                <h3>Miesiąc rozliczeniowy: {{currentPeriod}}</h3>
                 <h6>(Aktualna data: 2015-01-12)</h6>
             </div>
             <!-- end container -->
@@ -164,23 +164,13 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-2">Czynsz</div>
-                    <div class="col-xs-2">12000.00 PLN</div>
-                    <div class="col-xs-2">2015-01-10</div>
-                    <div class="col-xs-2">Czynsz za mieszkanie</div>
-                    <div class="col-xs-2 text-center">2015-01-09 (12:00)</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" data-toggle="modal" data-target="#confirm-modal"></button>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
+                <div class="row" ng-repeat="expense in expenses">
+                    <div class="col-xs-2">{{expense.title}} <span class="glyphicon glyphicon-bell"></span>
                     </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
+                    <div class="col-xs-2">{{expense.amount}}</div>
+                    <div class="col-xs-2">{{expense.deadline}}</div>
+                    <div class="col-xs-2">{{expense.description}}</div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
                     </div>
@@ -190,293 +180,8 @@
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-xs-2">Czynsz</div>
-                    <div class="col-xs-2">12000.00 PLN</div>
-                    <div class="col-xs-2">2015-01-10</div>
-                    <div class="col-xs-2">Czynsz za mieszkanie</div>
-                    <div class="col-xs-2 text-center">2015-01-09 (12:00)</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" data-toggle="modal" data-target="#confirm-modal"></button>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-xs-2">Czynsz</div>
-                    <div class="col-xs-2">12000.00 PLN</div>
-                    <div class="col-xs-2">2015-01-10</div>
-                    <div class="col-xs-2">Czynsz za mieszkanie</div>
-                    <div class="col-xs-2 text-center">2015-01-09 (12:00)</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" data-toggle="modal" data-target="#confirm-modal"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>  <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
-                 <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-2">Energia <span class="glyphicon glyphicon-bell"></span>
-                    </div>
-                    <div class="col-xs-2">15.00 PLN</div>
-                    <div class="col-xs-2">2015-01-20</div>
-                    <div class="col-xs-2">Światło i inne</div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
-                    </div>
-                </div> 
+           
+    
 
             </section>
 
