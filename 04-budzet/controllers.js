@@ -28,24 +28,38 @@ app.controller('MainCtrl', function ($scope) {
             "deadline": "2014-02-12",
             "description": "Bo wylacza prad"
         }];
+    
+    $scope.incomes = [{
+            "id": 1,
+            "title": "PensjA1",
+            "amount": 1100000.52,
+            "date": "2014-02-12",
+            "description": "Od IQ",
+        },
+        {
+            "id": 2,
+            "title": "PensjA2",
+            "amount": 2.00,
+            "date": "2014-02-15",
+            "description": "Od AAA",
+        }];
 
+    $scope.getTotalIncomes = function () {
+        return $scope.getTotal($scope.incomes, "amount");
+    };
+    
     $scope.getTotalExpenses = function () {
+        return $scope.getTotal($scope.expenses, "amount");
+    };
+    
+    
+    $scope.getTotal = function (list, item) {
         var total = 0;
-        $scope.expenses.forEach(function (expense) {
-            total += expense.amount;
+        list.forEach(function (expense) {
+            total += expense[item];
         });
         return total;
     };
-
-    //    $scope.getTotalExpensesPaid = function () {
-    //        var totalPaid = 0;
-    //        $scope.expenses.forEach(function (expense) {
-    //            if(expense.paid) {
-    //                totalPaid += expense.amount;
-    //            }
-    //        });
-    //        return totalPaid;
-    //    };
 
     $scope.getTotalExpensesPaid = function () {
         var totalPaid = 0;
@@ -75,29 +89,6 @@ app.controller('MainCtrl', function ($scope) {
         $scope.newExpense.id = Math.random();
         $scope.expenses.push($scope.newExpense);
         $scope.newExpense = null;
-    };
-
-    $scope.incomes = [{
-            "id": 1,
-            "title": "PensjA1",
-            "amount": 1100000.52,
-            "date": "2014-02-12",
-            "description": "Od IQ",
-        },
-        {
-            "id": 2,
-            "title": "PensjA2",
-            "amount": 2.00,
-            "date": "2014-02-15",
-            "description": "Od AAA",
-        }];
-
-    $scope.getTotalIncomes = function () {
-        var total = 0;
-        $scope.incomes.forEach(function (income) {
-            total += income.amount;
-        });
-        return total;
     };
     
 });
