@@ -90,7 +90,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 text-left">W sumie przychodów:</div>
-                                <div class="col-sm-6 text-right">250.00 PLN</div>
+                                <div class="col-sm-6 text-right">{{getTotalIncomes()}} PLN</div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">&nbsp;</div>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 text-left">Powinno zostać:</div>
-                                <div class="col-sm-6 text-right">50.00 PLN</div>
+                                <div class="col-sm-6 text-right">{{getTotalIncomes() - getTotalExpenses()}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">&nbsp;</div>

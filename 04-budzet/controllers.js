@@ -92,4 +92,12 @@ app.controller('MainCtrl', function ($scope) {
             "description": "Od AAA",
         }];
 
+    $scope.getTotalIncomes = function () {
+        var total = 0;
+        $scope.incomes.forEach(function (income) {
+            total += income.amount;
+        });
+        return total;
+    };
+    
 });
