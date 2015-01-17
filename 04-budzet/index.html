@@ -192,7 +192,7 @@
                     </div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" ng-click="showConfirm(expense)"></button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" ng-click="tryRemoveExpense(expense)"></button>
                     </div>
                 </div>
 
@@ -230,7 +230,7 @@
                     <div class="col-xs-4">{{income.description}}</div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
-                        <button type="button" ng-click="removeIncome(income)" class="btn btn-default glyphicon glyphicon-trash"></button>
+                        <button ng-click="tryRemoveIncome(income)" type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
             </section>

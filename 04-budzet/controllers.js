@@ -100,10 +100,10 @@ app.controller('MainCtrl', function ($scope, dialogService) {
         $scope.newIncome = null;
     };
 
-    $scope.removeIncome = function (income) {
+    function removeIncome(income) {
         var searchedIncome = $scope.incomes.indexOf(income);
         $scope.incomes.splice(searchedIncome, 1);
-    };
+    }
 
 
     $scope.datePickerOpen = function ($event) {
@@ -121,12 +121,22 @@ app.controller('MainCtrl', function ($scope, dialogService) {
     $scope.datePickerFormat = 'yyyy-MM-dd';
     
     
-    $scope.showConfirm = function(expense){
+    $scope.tryRemoveExpense = function(expense){
         dialogService.confirm().then(function (result) {
             if(result){
                 removeExpense(expense);
             } else {
                 console.log("nie: " + expense);
+            }
+        });
+    };
+    
+    $scope.tryRemoveIncome = function(income){
+        dialogService.confirm().then(function (result) {
+            if(result){
+                removeIncome(income);
+            } else {
+                console.log("nie: " + income);
             }
         });
     };
