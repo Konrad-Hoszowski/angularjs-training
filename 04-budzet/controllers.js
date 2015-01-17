@@ -8,7 +8,10 @@ app.controller('MainCtrl', function ($scope) {
             "title": "Czynsz",
             "amount": 11,
             "deadline": "2014-02-12",
-            "description": "Bo wylacza prad"
+            "description": "Bo wylacza prad",
+            "paid": true,
+            "paidDate": "2014-02-12"
+            
         },
         {
             "title": "Czynsz2",
@@ -22,4 +25,5 @@ app.controller('MainCtrl', function ($scope) {
             "deadline": "2014-02-12",
             "description": "Bo wylacza prad"
         }];
+    
 });

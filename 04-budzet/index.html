@@ -11,7 +11,7 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    
+
     <script src="http://code.angularjs.org/1.2.13/angular.min.js"></script>
     <script src="controllers.js"></script>
 
@@ -20,9 +20,9 @@
 <body data-spy="scroll" data-target="#main-navbar" ng-controller="MainCtrl">
     <header>
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" id="main-navbar">
-            
+
             <div class="container">
-                
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-nav-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -34,13 +34,16 @@
                 </div>
                 <div class="collapse navbar-collapse" id="example-nav-collapse1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#expense-section">Wydatki</a>      </li>
-                        <li><a href="#income-section">Przychody</a> </li>
+                        <li class="active"><a href="#expense-section">Wydatki</a> 
+                        </li>
+                        <li><a href="#income-section">Przychody</a> 
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy ({{currentPeriod}}) <span class="caret"></span></a>
-<!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy (2015-01) <span class="caret"></span></button>-->
+                            <!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy (2015-01) <span class="caret"></span></button>-->
                             <ul class="dropdown-menu" role="menu">
-                                <li ng-repeat="period in periods"><a href="#">{{period}}</a></li>
+                                <li ng-repeat="period in periods"><a href="#">{{period}}</a>
+                                </li>
 
                             </ul>
                         </li>
@@ -48,12 +51,15 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-<!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></button>-->
+                            <!--                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></button>-->
                             <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Definiuj nowy okres rozliczeniowy</a></li>
-                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#default-values-modal">Domyślne płatności</a></li>
+                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1">Definiuj nowy okres rozliczeniowy</a>
+                                </li>
+                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#default-values-modal">Domyślne płatności</a>
+                                </li>
                                 <li role="presentation" class="divider"></li>
-                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#about-modal">O programie</a></li>
+                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#about-modal">O programie</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -172,16 +178,17 @@
                     <div class="col-xs-2">{{expense.deadline}}</div>
                     <div class="col-xs-2">{{expense.description}}</div>
                     <div class="col-xs-2 text-center">
-                        <button type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
+                        <button ng-show="!expense.paid" type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
+                        <span ng-show="expense.paid">{{expense.paidDate}}</span>
                     </div>
                     <div class="col-xs-2 text-center">
                         <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                
-           
-    
+
+
+
 
             </section>
 
@@ -228,8 +235,8 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                
-                  <div class="row">
+
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -239,7 +246,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -249,7 +256,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -259,7 +266,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -269,7 +276,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -279,7 +286,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -289,7 +296,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -299,7 +306,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -309,7 +316,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -319,7 +326,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -329,7 +336,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -339,7 +346,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -349,7 +356,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -359,7 +366,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -369,7 +376,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -379,7 +386,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -389,7 +396,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -399,7 +406,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -409,7 +416,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -419,8 +426,8 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                
-                  <div class="row">
+
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -430,7 +437,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -440,7 +447,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -450,7 +457,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -460,7 +467,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -470,7 +477,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -480,7 +487,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -490,7 +497,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -500,7 +507,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -510,7 +517,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -520,7 +527,7 @@
                         <button type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
                     </div>
                 </div>
-                  <div class="row">
+                <div class="row">
                     <div class="col-xs-2">Fucha</div>
                     <div class="col-xs-2">10.00 PLN</div>
                     <div class="col-xs-2">2015-01-20</div>
@@ -661,9 +668,9 @@
                 </div>
             </div>
         </div>
-        
-        
-    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
+
+
+        <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -680,7 +687,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
 
     </div>
     <!-- end demo-area -->
