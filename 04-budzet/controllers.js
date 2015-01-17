@@ -120,26 +120,25 @@ app.controller('MainCtrl', function ($scope, dialogService) {
 
     $scope.datePickerFormat = 'yyyy-MM-dd';
     
-    
-    $scope.tryRemoveExpense = function(expense){
-        dialogService.confirm().then(function (result) {
-            if(result){
-                removeExpense(expense);
-            } else {
-                console.log("nie: " + expense);
-            }
+    $scope.tryRemoveExpense = function(expense) {
+        askToExecute(function() {
+            removeExpense(expense);
         });
     };
     
     $scope.tryRemoveIncome = function(income){
-        dialogService.confirm().then(function (result) {
-            if(result){
-                removeIncome(income);
-            } else {
-                console.log("nie: " + income);
-            }
+        askToExecute(function() {
+            removeIncome(income);
         });
     };
+    
+    function askToExecute(operation) {
+        dialogService.confirm().then(function (result) {
+            if(result){
+                operation();
+            }
+        });
+    }
     
 });
 
