@@ -12,6 +12,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
     <script src="http://code.angularjs.org/1.2.13/angular.min.js"></script>
     <script src="controllers.js"></script>
 
@@ -178,7 +179,7 @@
                     <div class="col-xs-2">{{expense.deadline}}</div>
                     <div class="col-xs-2">{{expense.description}}</div>
                     <div class="col-xs-2 text-center">
-                        <button ng-show="!expense.paid" type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
+                        <button ng-click="markAsPaid(expense)" ng-show="!expense.paid" type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
                         <span ng-show="expense.paid">{{expense.paidDate}}</span>
                     </div>
                     <div class="col-xs-2 text-center">

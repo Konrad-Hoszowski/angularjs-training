@@ -5,6 +5,7 @@ app.controller('MainCtrl', function ($scope) {
     $scope.currentPeriod = $scope.periods[0];
 
     $scope.expenses = [{
+            "id": 1,
             "title": "Czynsz",
             "amount": 11,
             "deadline": "2014-02-12",
@@ -14,12 +15,14 @@ app.controller('MainCtrl', function ($scope) {
 
         },
         {
+            "id": 2,
             "title": "Czynsz2",
             "amount": 12,
             "deadline": "2014-02-12",
             "description": "Bo wylacza prad"
         },
         {
+            "id": 3,
             "title": "Czynsz3",
             "amount": 13,
             "deadline": "2014-02-12",
@@ -34,27 +37,33 @@ app.controller('MainCtrl', function ($scope) {
         return total;
     };
 
-//    $scope.getTotalExpensesPaid = function () {
-//        var totalPaid = 0;
-//        $scope.expenses.forEach(function (expense) {
-//            if(expense.paid) {
-//                totalPaid += expense.amount;
-//            }
-//        });
-//        return totalPaid;
-//    };
-    
+    //    $scope.getTotalExpensesPaid = function () {
+    //        var totalPaid = 0;
+    //        $scope.expenses.forEach(function (expense) {
+    //            if(expense.paid) {
+    //                totalPaid += expense.amount;
+    //            }
+    //        });
+    //        return totalPaid;
+    //    };
+
     $scope.getTotalExpensesPaid = function () {
         var totalPaid = 0;
-        
-        var paid = $scope.expenses.filter(function(expense){
+
+        var paid = $scope.expenses.filter(function (expense) {
             return expense.paid;
         });
-        
+
         paid.forEach(function (expense) {
-                totalPaid += expense.amount;
+            totalPaid += expense.amount;
         });
         return totalPaid;
+    };
+    
+    $scope.markAsPaid = function(expense) {
+        expense.paid = true;
+        expense.paidDate = moment().format('YYYY-MM-DD');
+        
     };
 
 });
