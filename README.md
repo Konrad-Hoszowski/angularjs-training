@@ -1,3 +1,3 @@
 # angularjs-training
 
-hangout link: https://plus.google.com/hangouts/_/grsnzgpqis5v7xac665xofjhbia
+hangout link: https://plus.google.com/hangouts/_/gtntkxlfn3yyafekhpzdrgfun4a?hl=pl
