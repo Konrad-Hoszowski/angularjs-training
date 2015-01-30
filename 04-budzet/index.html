@@ -359,9 +359,6 @@
             </div>
         </div>
 
-
-
-
         <div class="modal fade" id="default-values-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -370,11 +367,11 @@
                         <h4 class="modal-title">Domyślne pozycje</h4>
                     </div>
                     <div class="modal-body">
-                        <ul>
-                            <li>Energia</li>
-                            <li>Czynsz</li>
-                            <li>Bilet miesięczny</li>
-                        </ul>
+                        <accordion close-others="true">
+                            <accordion-group heading="{{defaultExpense.title}} {{defaultExpense.amount}}" ng-repeat="defaultExpense in defaultExpenses">
+                                {{defaultExpense.deadline}} + formularz do edycji
+                            </accordion-group>
+                        </accordion>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-default" data-dismiss="modal">Zamknij</a>
@@ -382,7 +379,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog">

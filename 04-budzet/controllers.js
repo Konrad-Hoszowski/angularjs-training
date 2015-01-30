@@ -48,6 +48,31 @@ app.controller('MainCtrl', function ($scope, dialogService) {
             "description": "Od AAA",
         }];
 
+    $scope.defaultExpenses = [
+        {
+            "id": 10,
+            "title": "Bilet miesięczny",
+            "amount": 11,
+            "deadline": "2014-02-12",
+            "description": "Bo wylacza prad"
+
+        },
+        {
+            "id": 20,
+            "title": "Podatek VAT",
+            "amount": 12,
+            "deadline": "2014-02-12",
+            "description": "Bo wylacza prad"
+        },
+        {
+            "id": 30,
+            "title": "Czynsz",
+            "amount": 13,
+            "deadline": "2014-02-12",
+            "description": "Bo wylacza prad"
+        }
+  ];
+
     $scope.getTotalIncomes = function () {
         return $scope.getTotal($scope.incomes, "amount");
     };
@@ -120,47 +145,47 @@ app.controller('MainCtrl', function ($scope, dialogService) {
 
     $scope.datePickerFormat = 'yyyy-MM-dd';
     $scope.datePickerFormatPeriod = 'yyyy-MM';
-    
-    $scope.tryRemoveExpense = function(expense) {
-        askToExecute(function() {
+
+    $scope.tryRemoveExpense = function (expense) {
+        askToExecute(function () {
             removeExpense(expense);
         });
     };
-    
-    $scope.tryRemoveIncome = function(income){
-        askToExecute(function() {
+
+    $scope.tryRemoveIncome = function (income) {
+        askToExecute(function () {
             removeIncome(income);
         });
     };
-    
+
     function askToExecute(operation) {
         dialogService.confirm().then(function (result) {
-            if(result){
+            if (result) {
                 operation();
             }
         });
     }
-    
-    $scope.saveNewPeriod = function(period) {
-        $scope.periods.push(moment(period).format('YYYY-MM'));    
+
+    $scope.saveNewPeriod = function (period) {
+        $scope.periods.push(moment(period).format('YYYY-MM'));
     };
-    
+
 });
 
 
-app.directive('numbersOnly', function(){
-   return {
-     require: 'ngModel',
-     link: function(scope, element, attrs, modelCtrl) {
-       modelCtrl.$parsers.push(function (inputValue) {
-           if (inputValue == undefined) return '' 
-           var transformedInput = inputValue.replace(/[^0-9+.]/g, ''); 
-           if (transformedInput!=inputValue) {
-              modelCtrl.$setViewValue(transformedInput);
-              modelCtrl.$render();
-           }         
-           return transformedInput;         
-       });
-     }
-   };
+app.directive('numbersOnly', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attrs, modelCtrl) {
+            modelCtrl.$parsers.push(function (inputValue) {
+                if (inputValue == undefined) return ''
+                var transformedInput = inputValue.replace(/[^0-9+.]/g, '');
+                if (transformedInput != inputValue) {
+                    modelCtrl.$setViewValue(transformedInput);
+                    modelCtrl.$render();
+                }
+                return transformedInput;
+            });
+        }
+    };
 });
