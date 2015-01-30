@@ -6,7 +6,7 @@ module.exports = {
     },
     
     getExpensesInPeriod: function (req, res) {
-        var period = req.param.period;
+        var period = req.params.period;
         res.status(200);
         res.send({});
     },
@@ -18,20 +18,20 @@ module.exports = {
     },
     
     editExpense: function (req, res) {
-        var id = req.param.id;
+        var id = req.params.id;
         var edited = req.body;
         res.status(200);
         res.send(edited);
     },
     
     deleteExpense: function (req, res) {
-        var id = req.param.id;
+        var id = req.params.id;
         res.status(204);
         res.send();
     },
     
     setPaid: function (req, res) {
-        var id = req.param.id;
+        var id = req.params.id;
         res.status(200);
         res.send();
     },
