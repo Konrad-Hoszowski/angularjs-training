@@ -32,7 +32,10 @@ module.exports = {
     
     setPaid: function (req, res) {
         var id = req.params.id;
-        res.status(200);
+        if (id == 1)
+            res.status(201);
+        else
+            res.status(200);
         res.send();
     },
 };

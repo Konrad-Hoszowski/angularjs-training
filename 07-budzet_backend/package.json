@@ -9,6 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.11.1"
+    "express": "^4.11.1",
+    "grunt-simple-mocha": "git+https://github.com/steveworkman/grunt-simple-mocha",
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.5",
+    "supertest": "^0.13.0",
+    "chai": "^1.10.0",
+    "should": "^4.6.2"
   }
 }
