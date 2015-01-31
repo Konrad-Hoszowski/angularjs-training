@@ -28,6 +28,13 @@ var operationSchema = mongoose.Schema({
     }
 });
 
+operationSchema.methods = {
+    toDTO: function() {
+        return {
+            operationType: this.operationType,
+        };
+    }
+};
 
 
 var Operation = mongoose.model('Operation', operationSchema);

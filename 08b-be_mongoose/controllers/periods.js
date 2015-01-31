@@ -1,11 +1,14 @@
+var Operation = require('../models/operation').Operation;
 module.exports = {
 
     getPeriods: function (req, res) {
-        res.status(200);
-        
-        var r = [{"period":"2015-11"},{"period":"2015-12"}];
-        
-        res.send(r);
+        Operation.distinct('period').exec(function (err, collection) {
+            if (err) {
+                return processError(res, err, 400);
+            } else {
+                res.send(200, collection);
+            }
+        });  
     },
     
     getPeriod: function (req, res) {
@@ -13,4 +16,12 @@ module.exports = {
         res.status(200);
         res.send({});
     }
+}
+
+function processError(res, err, errorCode) {
+    res.status(errorCode);
+    res.send({
+        reason: err.toString()
+    });
+    return res;
 }

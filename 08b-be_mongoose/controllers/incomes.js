@@ -34,15 +34,36 @@ module.exports = {
 
     editIncome: function (req, res) {
         var id = req.params.id;
-        var edited = req.body;
-        res.status(200);
-        res.send(edited);
+        var operation = req.body;
+        var paidDate = operation.paidDate;
+        operation.period = moment(paidDate).format('YYYY-MM');
+        operation.operationType = "income";
+
+        Operation.update({
+            "_id": id
+        }, operation, function (err, operation) {
+            if (err) {
+                console.log(err);
+                return processError(res, err, 400);
+            } else {
+                res.send(200);
+            }
+        });
     },
 
     deleteIncome: function (req, res) {
         var id = req.params.id;
-        res.status(204);
-        res.send();
+
+        Operation.remove({
+            "_id": id
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return processError(res, err, 400);
+            } else {
+                res.send(204);
+            }
+        });
     },
 };
 
