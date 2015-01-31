@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="budget">
+
+<head>
+    <meta charset="utf-8">
+    <title>Budżet domowy</title>
+    <meta name="author" content="Maciej Stopczyk">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/momentjs/min/moment.min.js"></script>
+    
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+
+
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>-->
+    <!--    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+    <!--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <script src="controllers.js"></script>
+    <script src="dialogService.js"></script>
+    <script src="userService.js"></script>
+    <script src="periodService.js"></script>
+    <script src="incomeService.js"></script>
+
+</head>
+
+<body data-spy="scroll" data-target="#main-navbar" ng-controller="MainCtrl">
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" id="main-navbar">
+
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-nav-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#top-section" class="navbar-brand"><span class="glyphicon glyphicon-euro"></span></a>
+                </div>
+                <div class="collapse navbar-collapse" id="example-nav-collapse1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#expense-section">Wydatki</a> 
+                        </li>
+                        <li><a href="#income-section">Przychody</a> 
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Okres rozliczeniowy ({{currentPeriod}}) <span class="caret"></span></a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="period in periods"><a href="#" ng-click="changeCurrentPeriod(period)">{{period}}</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation">
+                                    <a href="#" data-toggle="modal" data-target="#period-modal" role="menuitem" tabindex="-1">Definiuj nowy okres rozliczeniowy</a>
+                                </li>
+                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#default-values-modal">Domyślne płatności</a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a href="#" role="menuitem" tabindex="-1" data-toggle="modal" data-target="#about-modal">O programie</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron" id="top-section">
+            <div class="container">
+                <h1>Budżet domowy</h1>
+                <h3>Miesiąc rozliczeniowy: {{currentPeriod}}</h3>
+                <h6>(Aktualna data: 2015-01-12)</h6>
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end jumbotron -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-body">
+                            <span class="glyphicon glyphicon-hand-up"></span>
+                            <h4>Przychody</h4>
+                            <div class="row">
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">W sumie przychodów:</div>
+                                <div class="col-sm-6 text-right">{{getTotalIncomes()}} PLN</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-body">
+                            <span class="glyphicon glyphicon-hand-down"></span>
+                            <h4>Wydatki</h4>
+
+                            <div class="row">
+                                <div class="col-sm-6 text-left">W sumie wydatków:</div>
+                                <div class="col-sm-6 text-right">{{getTotalExpenses()}} PLN</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">Już zapłacono:</div>
+                                <div class="col-sm-6 text-right">{{getTotalExpensesPaid()}} PLN</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">Jeszcze do zapłaty:</div>
+                                <div class="col-sm-6 text-right">{{getTotalExpenses() - getTotalExpensesPaid()}} PLN</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-body">
+                            <span class="glyphicon glyphicon-hand-right"></span>
+                            <h4>Oszczędności</h4>
+                            <div class="row">
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-left">Powinno zostać:</div>
+                                <div class="col-sm-6 text-right">{{getTotalIncomes() - getTotalExpenses()}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <hr>
+        </div>
+        <!-- end container -->
+    </header>
+
+    <div class="demo-area">
+        <div class="container">
+            <section id="expense-section">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h3>Wydatki <button type="button" class="btn btn-default glyphicon glyphicon-plus" data-toggle="modal" data-target="#new-expense-modal"></button></h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2"><strong>Tytuł</strong>
+                    </div>
+                    <div class="col-xs-2"><strong>Kwota</strong>
+                    </div>
+                    <div class="col-xs-2"><strong>Płatne do</strong>
+                    </div>
+                    <div class="col-xs-2"><strong>Opis</strong>
+                    </div>
+                    <div class="col-xs-2 text-center"><strong>Zapłacone?</strong>
+                    </div>
+                    <div class="col-xs-2 text-center"><strong>Akcja</strong>
+                    </div>
+                </div>
+
+
+                <div class="row" ng-repeat="expense in expenses">
+                    <div class="col-xs-2">{{expense.title}} <span class="glyphicon glyphicon-bell"></span>
+                    </div>
+                    <div class="col-xs-2">{{expense.amount}}</div>
+                    <div class="col-xs-2">{{expense.deadline | date:"yyyy-MM-dd"}}</div>
+                    <div class="col-xs-2">{{expense.description}}</div>
+                    <div class="col-xs-2 text-center">
+                        <button ng-click="markAsPaid(expense)" ng-show="!expense.paid" type="button" class="btn btn-default glyphicon glyphicon-credit-card"></button>
+                        <span ng-show="expense.paid">{{expense.paidDate | date:"yyyy-MM-dd"}}</span>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
+                        <button type="button" class="btn btn-default glyphicon glyphicon-trash" ng-click="tryRemoveExpense(expense)"></button>
+                    </div>
+                </div>
+
+
+
+
+            </section>
+
+            <hr />
+
+            <section>
+                <div class="row">
+                    <div class="col-xs-12 text-center" id="income-section">
+                        <h3>Przychody <button type="button" class="btn btn-default glyphicon glyphicon-plus" data-toggle="modal" data-target="#new-income-modal"></button></h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2"><strong>Tytuł</strong>
+                    </div>
+                    <div class="col-xs-2"><strong>Kwota</strong>
+                    </div>
+                    <div class="col-xs-2"><strong>Wpłata dnia</strong>
+                    </div>
+                    <div class="col-xs-4"><strong>Opis</strong>
+                    </div>
+                    <div class="col-xs-2 text-center"><strong>Akcja</strong>
+                    </div>
+                </div>
+
+                <div class="row" ng-repeat="income in incomes">
+                    <div class="col-xs-2">{{income.title}}</div>
+                    <div class="col-xs-2">{{income.amount}}</div>
+                    <div class="col-xs-2">{{income.date | date:"yyyy-MM-dd"}}</div>
+                    <div class="col-xs-4">{{income.description}}</div>
+                    <div class="col-xs-2 text-center">
+                        <button type="button" class="btn btn-default glyphicon glyphicon-edit"></button>
+                        <button ng-click="tryRemoveIncome(income)" type="button" class="btn btn-default glyphicon glyphicon-trash"></button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+
+
+        <div class="modal fade" id="new-income-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="" role="form">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Nowa pozycja (przychód)</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="income-title" class="control-label">Tytuł przychodu</label>
+                                <input type="text" ng-model="newIncome.title" id="income-title" class="form-control">
+                                <p class="help-block">Tytuł pozycji</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="income-amount" class="control-label">Kwota</label>
+                                <input type="text" ng-model="newIncome.amount" id="income-amount" class="form-control" numbers-only="true">
+                                <p class="help-block">Kwota przychodu w formacie xx.yy</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="income-description" class="control-label">Opis</label>
+                                <input type="text" ng-model="newIncome.description" id="income-description" class="form-control">
+                                <p class="help-block">Dłuższy opis pozycji</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="income-date" class="control-label">Data wpłaty</label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" id="income-date" class="form-control" datepicker-popup="{{datePickerFormat}}" datepicker-options="datePickerOptions" ng-model="newIncome.date" is-open="opened" ng-required="true" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-default" ng-click="datePickerOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="help-block">Termin otrzymania płatności.</p>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <button type="button" ng-click="addIncome()" class="btn btn-default" data-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="new-expense-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="" role="form">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Nowa pozycja (wydatek)</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="expense-title" class="control-label">Tytuł wydatku</label>
+                                <input ng-model="newExpense.title" type="text" id="expense-title" class="form-control">
+                                <p class="help-block">Tytuł pozycji</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-amount" class="control-label">Kwota</label>
+                                <input ng-model="newExpense.amount" type="text" id="expense-amount" class="form-control" numbers-only="true">
+                                <p class="help-block">Kwota wydatku w formacie xx.yy</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-description" class="control-label">Opis</label>
+                                <input ng-model="newExpense.description" type="text" id="expense-description" class="form-control">
+                                <p class="help-block">Dłuższy opis pozycji</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-date" class="control-label">Data płatności</label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" id="expense-date" class="form-control" datepicker-popup="{{datePickerFormat}}" datepicker-options="datePickerOptions" ng-model="newExpense.deadline" is-open="opened" ng-required="true" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-default" ng-click="datePickerOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="help-block">Termin dokonania płatności.</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <button ng-click="addExpense()" data-dismiss="modal" type="button" class="btn btn-default">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Potwierdź operację</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Na pewno chcesz usunąć pozycję ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Nie</a>
+                        <button type="submit" class="btn btn-default">Tak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="default-values-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Domyślne pozycje</h4>
+                    </div>
+                    <div class="modal-body">
+                        <accordion close-others="true">
+                            <accordion-group heading="{{defaultExpense.title}} {{defaultExpense.amount}}" ng-repeat="defaultExpense in defaultExpenses">
+                                {{defaultExpense.deadline}} + formularz do edycji
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Zamknij</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="about-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">O programie</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        Program demonstracyjny
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="period-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Dodaj nowy okres rozliczeniowy</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" id="period-date" class="form-control" datepicker-popup="{{datePickerFormatPeriod}}" datepicker-options="datePickerOptions" ng-model="period" is-open="opened" ng-required="true" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-default" ng-click="datePickerOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+
+                        <button class="btn btn-default" data-dismiss="modal" ng-click="saveNewPeriod(period)">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end demo-area -->
+
+    <footer>
+        <div class="container">
+            <hr>
+
+            <p>
+                <small>Przykładowa aplikacja z wykorzystaniem AngularJS</small>
+            </p>
+        </div>
+        <!-- end container -->
+    </footer>
+
+    </div>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
