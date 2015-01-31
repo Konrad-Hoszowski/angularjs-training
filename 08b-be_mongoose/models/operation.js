@@ -22,6 +22,9 @@ var operationSchema = mongoose.Schema({
     },
     operationType: {
         type: String
+    },
+    period: {
+        type: String
     }
 });
 

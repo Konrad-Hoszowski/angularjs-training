@@ -1,8 +1,12 @@
 var Operation = require('../models/operation').Operation;
+var moment = require('moment');
+
 module.exports = {
-    getIncomes: function (req, res) {
+    getIncomesInPeriod: function (req, res) {
+        var period = req.params.period;
         Operation.find({
-            "operationType": "income"
+            "operationType": "income",
+            "period": period
         }).exec(function (err, collection) {
             if (err) {
                 return processError(res, err, 400);
@@ -12,18 +16,12 @@ module.exports = {
         });
     },
 
-    getIncomesInPeriod: function (req, res) {
-        var period = req.params.period;
-        console.log(period);
-        res.status(200);
-        res.send({
-            period: period
-        });
-    },
-
     addIncome: function (req, res) {
         var operation = req.body;
+        var paidDate = operation.paidDate;
+        operation.period = moment(paidDate).format('YYYY-MM');
         operation.operationType = "income";
+
         Operation.create(operation, function (err, operation) {
             if (err) {
                 console.log(err);

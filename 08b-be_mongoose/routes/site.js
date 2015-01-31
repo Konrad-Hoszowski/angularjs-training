@@ -5,7 +5,6 @@ periods = require('../controllers/periods');
 
 
 module.exports = function (app) {
-    app.get('/incomes', incomes.getIncomes);
     app.get('/incomes/:period', incomes.getIncomesInPeriod);
     app.post('/incomes', incomes.addIncome);
     app.put('/incomes/:id', incomes.editIncome);
