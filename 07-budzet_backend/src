@@ -1,0 +1,13 @@
+
+[0m[0m
+[0m  budget rest api[0m
+Listening on port 3030...
+[0m    list periods[0m
+[2K[0G    [32m  ✓[0m[90m should return full list [0m
+[0m    paid expense[0m
+[2K[0G    [32m  ✓[0m[90m should return OK [0m
+
+Stopped listening on port 3030
+
+[92m [0m[32m 2 passing[0m[90m (30ms)[0m
+

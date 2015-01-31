@@ -1,0 +1,17 @@
+{
+  "name": "06-express",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.11.1",
+    "mongoose": "^3.8.22",
+    "body-parser": "^1.10.2",
+    "cors": "^2.5.3"
+  }
+}
