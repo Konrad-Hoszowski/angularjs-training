@@ -4,20 +4,27 @@ app.controller('MainCtrl', function ($scope, dialogService, userService, periodS
     $scope.periods = [];
     $scope.incomes = [];
 
-    periodService.getAll().then(function (periods) {
+    periodService.getAll()
+        .then(onPeriods)
+        .then(loadCurrentPeriod);
+    
+    function onPeriods(periods) {
         periods.forEach(function (period) {
             $scope.periods.push(period);
         });
         $scope.currentPeriod = $scope.periods[0];
-        incomeService.getInPeriod($scope.currentPeriod).then(function (incomes) {
-            incomes.forEach(function (income) {
-                $scope.incomes.push(income);
-            });
+    }
+    
+    function loadCurrentPeriod() {
+        incomeService.getInPeriod($scope.currentPeriod)
+            .then(function (incomes) {
+                $scope.incomes = incomes;
         });
-    });
+    }
 
     $scope.changeCurrentPeriod = function (period) {
         $scope.currentPeriod = period;
+        loadCurrentPeriod();
     };
 
 
@@ -127,9 +134,9 @@ app.controller('MainCtrl', function ($scope, dialogService, userService, periodS
 
     function removeIncome(income) {
         var searchedIncome = $scope.incomes.indexOf(income);
+        incomeService.delete(income._id).then(loadCurrentPeriod);
         $scope.incomes.splice(searchedIncome, 1);
     }
-
 
     $scope.datePickerOpen = function ($event) {
         $event.preventDefault();
