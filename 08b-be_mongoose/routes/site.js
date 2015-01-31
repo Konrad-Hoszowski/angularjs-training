@@ -18,5 +18,4 @@ module.exports = function (app) {
     app.put('/expenses/:id/paid', expenses.setPaid);
         
     app.get('/periods', periods.getPeriods);
-    app.get('/periods/:id', periods.getPeriod);
 };
