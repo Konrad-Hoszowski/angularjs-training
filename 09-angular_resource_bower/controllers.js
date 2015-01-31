@@ -4,22 +4,27 @@ app.controller('MainCtrl', function ($scope, dialogService, userService, periodS
     $scope.periods = [];
     $scope.incomes = [];
 
-    periodService.getAll()
+    reloadAll();
+    
+    function reloadAll() {
+        periodService.getAll()
         .then(onPeriods)
         .then(loadCurrentPeriod);
+    }
     
     function onPeriods(periods) {
+        $scope.periods = [];
         periods.forEach(function (period) {
             $scope.periods.push(period);
         });
         $scope.currentPeriod = $scope.periods[0];
     }
-    
+
     function loadCurrentPeriod() {
         incomeService.getInPeriod($scope.currentPeriod)
             .then(function (incomes) {
                 $scope.incomes = incomes;
-        });
+            });
     }
 
     $scope.changeCurrentPeriod = function (period) {
@@ -127,9 +132,10 @@ app.controller('MainCtrl', function ($scope, dialogService, userService, periodS
     }
 
     $scope.addIncome = function () {
-        $scope.newIncome.id = Math.random();
-        $scope.incomes.push($scope.newIncome);
-        $scope.newIncome = null;
+        incomeService.add($scope.newIncome).then(function () {
+            $scope.newIncome = null;
+            reloadAll();
+        });
     };
 
     function removeIncome(income) {

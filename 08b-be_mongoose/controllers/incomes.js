@@ -18,8 +18,7 @@ module.exports = {
 
     addIncome: function (req, res) {
         var operation = req.body;
-        var paidDate = operation.paidDate;
-        operation.period = moment(paidDate).format('YYYY-MM');
+        operation.period = moment(operation.date).format('YYYY-MM');
         operation.operationType = "income";
 
         Operation.create(operation, function (err, operation) {
