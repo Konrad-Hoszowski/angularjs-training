@@ -1,0 +1,12 @@
+curl -i -X POST -H "Content-Type: application/json" -d '{"title":"Zwrot podatku3","amount":123, "paidDate": "2015-01-01"}' http://localhost:3000/incomes
+curl -i -X POST -H "Content-Type: application/json" -d '{"title":"Zwrot dlugu","amount":1232, "paidDate": "2015-02-02"}' http://localhost:3000/incomes
+curl -i -X POST -H "Content-Type: application/json" -d '{"title":"ZA ...","amount":1233, "paidDate": "2015-02-02"}' http://localhost:3000/incomes
+
+-- edit
+curl -i -X PUT -H "Content-Type: application/json" -d '{"title":"ZA Pizze...","amount":999, "paidDate": "2015-02-02"}' http://localhost:3000/incomes/54ccac454e652a49132ddc03
+
+-- delete
+curl -i -X DELETE http://localhost:3000/incomes/54ccac454e652a49132ddc03
+
+-- get
+curl -i http://localhost:3000/periods
